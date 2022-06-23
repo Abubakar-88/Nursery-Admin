@@ -1,0 +1,37 @@
+
+
+<div class="no-v-scroll">
+    <button mat-icon-button class="flex-middle full-width" style="height: 64px;">
+      <mat-icon>menu</mat-icon> 
+    </button>
+  <div class="side-menu" style="height: 800px;">
+        <div class="flex-column">
+            <a mat-button style="height: 80px;" [routerLink]="['/admin-dashboard']" routerLinkActive="active">
+                <div class="flex-middle full-height" style="flex-direction: column;">
+                    <mat-icon>dashboard</mat-icon>
+                    <span style="font-size: 12px;">Dashboard</span>
+                </div>
+            </a>
+
+            <a mat-button style="height: 80px;" [routerLink]="['/order-list']" routerLinkActive="active">
+                <div class="flex-middle full-height" style="flex-direction: column;">
+                    <mat-icon>shopping_cart</mat-icon>
+                    <span style="font-size: 12px;">Order</span>
+                </div>
+            </a>
+            <a mat-button style="height: 80px;" [routerLink]="['/add-product']" routerLinkActive="active">
+                <div class="flex-middle full-height" style="flex-direction: column;">
+                    <mat-icon>shop</mat-icon>
+                    <span style="font-size: 12px;">Add Product</span>
+                </div>
+            </a>
+            <a mat-button style="height: 80px;" [routerLink]="['/category']" routerLinkActive="active">
+                <div class="flex-middle full-height" style="flex-direction: column;">
+                    <mat-icon>add_shopping_cart</mat-icon>
+                    <span style="font-size: 12px;">Product Category</span>
+                </div>
+            </a>
+                 
+        </div>
+  </div>
+</div>

@@ -1,0 +1,84 @@
+ <div *ngIf="isSignedin" class="signin-status-user-info"> 
+<div class="jumbotron d-flex align-items-center min-vh-48">
+<div class="page-wrap-product-list">
+    <div class="flex-item-center">
+        <h3>Products</h3>
+        <div class="very-small-gap"></div>
+        <mat-icon matTooltip="Create products">help_outline</mat-icon>
+      </div>
+      <a mat-raised-button color="primary" [routerLink]="['/add-product']">
+        <mat-icon>add</mat-icon>
+        Add Product
+      </a>
+    
+        
+      <form class="form-inline my-2 my-lg-0">
+
+        <mat-label class="search-label"><h2>Search Product By Tracking number:</h2></mat-label>
+        <input type="search" (ngModelChange)="searchOrder(key.value)" #key="ngModel" ngModel
+         name="key" id="searchName" class="form-control mr-sm-2 sinput" placeholder="Search order..." required >
+ 
+     </form>
+    
+
+    <div class="">
+       
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col"> order_tracking_number</th>
+                <th scope="col">total_price</th>
+                <th scope="col">total_quantity</th>
+                <th scope="col">billing_address_id</th>
+                <th scope="col">customer_id</th>
+                <th scope="col">shipping_address_id</th>
+                <th scope="col">status</th>
+                <th scope="col">date_created</th>
+                <th scope="col">last_updated</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let order of orders | paginate : {
+                itemsPerPage: pageSize,
+                currentPage: page,
+                totalItems: count
+              };
+        let i = index
+      "
+      >
+                <th scope="row">{{ order?.id }}</th>
+                <td>  {{ order?.orderTrackingNumber}}</td>
+
+                <td>
+                  
+                  {{ order?.totalPrice | currency: 'USD'}}
+                </td>
+                <td>{{ order?.totalQuantity}}</td>
+                <td> {{order?.billingAddress}}  </td>
+                <td>{{getCustomerName(order)}}</td>
+                <td>{{ order?.shippingAddress }}</td>
+                <td>{{ order?.status }}</td>
+                <td>{{ order?.dateCreated }}</td>
+                <td>{{ order?.lastUpdated }}</td>
+               
+              
+                </tr>
+            </tbody>
+          </table>
+          <pagination-controls
+          previousLabel="Prev"
+          nextLabel="Next"
+          [responsive]=true
+          (pageChange)="handlePageChange($event)"
+        ></pagination-controls>
+    
+        <select (change)="handlePageSizeChange($event)">
+          <option *ngFor="let size of pageSizes" [ngValue]="size">
+            {{ size }}
+          </option>
+        </select>
+        </div>
+</div>
+</div>
+</div> 

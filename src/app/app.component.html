@@ -1,0 +1,23 @@
+<div class="page-wrapper">
+  <aside class="menu-sidebar d-none d-lg-block">
+   <div class="logo-header">
+     <img src="assets/images/logo.png" alt="" class="img-responsive">
+
+   </div>
+    <app-side-nav></app-side-nav> 
+  </aside>
+  <div class="page-container">
+    <header class="header-desktop">
+        <div class="section-content section-content-p30">
+            <div class="container-fluid">
+              <div class="header-wrap">
+                <app-admin></app-admin> 
+              </div>
+            </div>
+        </div>
+    </header>
+    <!-- The routed views render in the <router-outlet>-->
+        <router-outlet></router-outlet>
+  </div>
+
+</div>

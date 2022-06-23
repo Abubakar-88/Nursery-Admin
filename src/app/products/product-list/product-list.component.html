@@ -1,0 +1,105 @@
+<div *ngIf="isSignedin" class="signin-status-user-info"> 
+
+<div class="container" id="main-container">
+<div class="page-wrap-product-list">
+   
+      <a mat-raised-button color="primary" [routerLink]="['/add-product']">
+        <mat-icon>add</mat-icon>
+        Add Product
+      </a>
+    
+    <form class="form-inline my-2 my-lg-0">
+
+        <mat-label class="search-label"><h2>Search Product:</h2></mat-label>
+        <input type="search" (ngModelChange)="searchProduct(key.value)" #key="ngModel" ngModel
+         name="key" id="searchName" class="form-control mr-sm-2 sinput" placeholder="Search products..." required >
+ 
+     </form>
+    
+<div class="jumbotron d-flex align-items-center min-vh-48">
+    <div class="">
+       
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">imageUrl</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">sku</th>
+                <th scope="col">Price</th>
+                <th scope="col">unitsInStock</th>
+                <th scope="col">Category Name</th>
+                <th scope="col">dateCreated</th>
+          
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of products | paginate : {
+                itemsPerPage: pageSize,
+                currentPage: page,
+                totalItems: count
+              };
+        let i = index
+      "
+      >
+                <th scope="row">{{ product?.id }}</th>
+                <td>  <img style="width: 80px;"src="{{ product?.imageUrl}}" class="detail-img" ></td>
+                <td>
+                  
+                  {{ product?.name }}
+                </td>
+                <td>{{ product?.sku}}</td>
+                <td>{{ product?.unitPrice | currency: 'USD' }}</td>
+                <td>{{ product?.unitsInStock }}</td>
+               
+                <td>
+                   <!-- <ng-container matColumnDef="categoryName">
+                    <th mat-header-cell *matHeaderCellDef>
+                        Category Name </th>
+                    <td mat-cell *matCellDef="let element"> {{getCategoryName(element)}} </td>
+                </ng-container> -->
+                  
+                {{getCategoryName(product)}}                       
+                </td>
+                <td>{{ product?.dateCreated }}</td>
+                <!-- <td><a (click)="onOpenModal(product, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i> </a></td>
+                 <td><a (click)="onOpenModal(product, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a></td> -->
+            
+            <td><a  class="btn btn-primary tooltips" (click)="updateProduct(product?.id)"><mat-icon>edit</mat-icon> Edit</a></td>
+            <td><a  class="btn btn-primary tooltips" (click)="deleteProduct(product?.id)"><mat-icon>delete</mat-icon> Delete</a></td>
+                </tr>
+            </tbody>
+          </table>
+          <pagination-controls
+          previousLabel="Prev"
+          nextLabel="Next"
+          [responsive]=true
+          (pageChange)="handlePageChange($event)"
+        ></pagination-controls>
+  
+        <select (change)="handlePageSizeChange($event)">
+          <option *ngFor="let size of pageSizes" [ngValue]="size">
+            {{ size }}
+          </option>
+        </select>
+        </div>
+     
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

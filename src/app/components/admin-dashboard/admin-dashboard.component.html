@@ -1,0 +1,94 @@
+
+<div *ngIf="isSignedin" class="signin-status-user-info"> 
+ <!-- <div class="jumbotron d-flex align-items-center min-vh-100">  -->
+    <div style="margin-top: 80px;" class="page-wrap-dashboard">
+   <h2 style="width: 300px; background: radial-gradient(#0da8e4, #00000052); color: white; margin-left: 20px;text-align: center;">Welcome Admin Dashboard</h2>
+ <!-- //<div class="home-container"> -->
+    <!-- <div class="full-hight card-background padding" style="min-height: 400px;"> -->
+        <!-- <div class="small-vertical-height"></div> -->
+        <div class="flex-middle">
+            <mat-card class="box flex-middle">
+                <div class="flex-column-center">
+                    <span class="number">{{totalCustomers}}</span>
+                    <span class="text"> Total Active Users</span>
+                </div>
+            </mat-card>
+            <!-- <mat-card class="box flex-middle">
+                <div class="flex-column-center">
+                   <span class="number">{{totalActiveOrders}}</span> 
+                    <span class="text"> Total Active Orders</span>
+                </div>
+            </mat-card> -->
+            <mat-card class="box flex-middle">
+                <div class="flex-column-center">
+                     <span class="number">{{totalEarning | currency: 'USD'}}</span> 
+                    <span class="text"> Total Earning</span>
+                </div>
+            </mat-card>
+            <mat-card class="box flex-middle">
+                <div class="flex-column-center">
+                    <span class="number">2</span>
+                    <span class="text"> Total Active Branches</span>
+                </div>
+            </mat-card>
+           
+            <mat-card class="box flex-middle">
+                <div class="flex-column-center">
+                    <span class="number">3.7/5</span>
+                    <span class="text"> Total Rating</span>
+                </div>
+            </mat-card>
+        </div>
+       <div class="small-vertical-height"></div>
+ <div style="margin-top: 80px;" class="page-wrap-dashboard-customer">
+    <h2>Customer List</h2>
+       <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col"> First Name</th>
+            <th scope="col">LastName</th>
+            <th scope="col">Email </th>
+      
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let customer of customers | paginate : {
+            itemsPerPage: pageSize,
+            currentPage: page,
+            totalItems: count
+          };
+    let i = index
+  "
+  >
+            <th scope="row">{{ customer?.id }}</th>
+            <td>
+              
+              {{ customer?.firstName }}
+            </td>
+            <td>{{ customer?.lastName}}</td>
+            <td>{{ customer?.email  }}</td>
+            <td><a  class="btn btn-primary tooltips" (click)="deleteCustomer(customer.id)"><mat-icon>delete</mat-icon> Delete</a></td>
+            </tr>
+        </tbody>
+      </table>
+      <pagination-controls
+      previousLabel="Prev"
+      nextLabel="Next"
+      [responsive]=true
+      (pageChange)="handlePageChange($event)"
+    ></pagination-controls>
+
+    <select (change)="handlePageSizeChange($event)">
+      <option *ngFor="let size of pageSizes" [ngValue]="size">
+        {{ size }}
+      </option>
+    </select>
+ </div>
+
+      
+    </div>
+</div> 
+
+    <!-- </div> --> 
+<!-- </div> -->

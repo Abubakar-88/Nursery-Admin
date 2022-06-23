@@ -1,0 +1,90 @@
+<div *ngIf="isSignedin" class="signin-status-user-info"> 
+<div class="vertical-height"></div>
+
+
+<div class="page-wrap-add-product" >
+
+
+<div  style="min-height: 200px; margin-top: 20px;" class="flex-middle">
+
+    <mat-card style="min-width: 500px;">
+        <div class="flex-width">
+            <a class="p-btn"mat-raised-button [routerLink]="['/product-list']">Go To Product List</a>
+            <h2 style="text-align: center;">Add Product</h2>
+        </div>
+        <div class="vertical-height"></div>
+        <form  [formGroup]="productForm" (ngSubmit)="onProductFormSubmit()">
+            <div class="flex-column">
+                <mat-form-field appearance="outline" class="flex1">
+                    <mat-label>Item Name</mat-label>
+                    <input matInput formControlName="name" placeholder="Item Name" required>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="flex1">
+                    <mat-label>SKU</mat-label>
+                    <input matInput formControlName="sku" placeholder="sku" required>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="flex1">
+                    <mat-label>Item Price</mat-label>
+                    <input matInput type="number" formControlName="unitPrice" placeholder="Item Price" required>
+                </mat-form-field>
+                <!-- <mat-form-field appearance="outline" class="flex1">
+                    <mat-label>Item Sort Description</mat-label>
+                    <input matInput formControlName="sortDescription" placeholder="Item Sort Description" required>
+                </mat-form-field> -->
+                <mat-form-field appearance="outline" class="flex1">
+                    <mat-label>Item Description</mat-label>
+                    <textarea matInput formControlName="description" placeholder="Item Descriptionr" required></textarea>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="flex1">
+                    <mat-label>Item Image Link</mat-label>
+                    <input matInput formControlName="imageUrl" placeholder="Enter Item Image Link" required>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="flex1">
+                    <mat-label>Units in Stack</mat-label>
+                    <input matInput formControlName="unitsInStock" placeholder="units In Stock" required>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Category </mat-label> 
+                    <mat-select formControlName ="selectedCategory" category_id="categoryxza" placeholder="Category" (selectionChange)="changeCategory($event.value)" >
+                      <mat-option *ngFor="let category of productCategories" [value]="category.id">
+                        {{category.categoryName}}
+                      </mat-option>
+                      
+                    </mat-select>
+                    
+                  </mat-form-field>
+                
+
+
+                <mat-label>Item Status:</mat-label>
+                <div class="vertical-height"></div>
+                <mat-radio-group formControlName="active" color="primary">
+
+                    <mat-radio-button [value]="true" style="margin-left: 10px;" checked="true">Active</mat-radio-button>
+                    <mat-radio-button [value]="false" style="margin-left: 10px;">Inactive</mat-radio-button>
+                </mat-radio-group>
+                <div class="vertical-height"></div>
+                <!-- <mat-label>Item Type:</mat-label>
+                <div class="vertical-height"></div> -->
+                <!-- <mat-radio-group formControlName="type" color="primary">
+
+                    <mat-radio-button value="veg" style="margin-left: 10px;" checked="true">Veg</mat-radio-button>
+                    <mat-radio-button value="nonveg" style="margin-left: 10px;">Non-veg</mat-radio-button>
+                </mat-radio-group> -->
+            </div>
+            <div class="vertical-height"></div>
+            <div class="flex-with-space-between">
+                <a [routerLink]="['/menu-setup/list']" mat-stroked-button color="primary" aria-label="Place order">
+                    <mat-icon>keyboard_arrow_left</mat-icon>
+                    Back
+                </a>
+                <button mat-raised-button type="submit" color="primary" [disabled]="productForm.status === 'INVALID'"
+                    aria-label="Place order">
+                    <mat-icon>done</mat-icon> <span>Save</span>
+                </button>
+            </div>
+        </form>
+    </mat-card>
+</div>
+</div>
+</div>

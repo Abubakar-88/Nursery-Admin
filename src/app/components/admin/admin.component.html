@@ -1,0 +1,10 @@
+<div class="login-header">
+  
+    <div *ngIf="isSignedin" class="signin-status-user-info">
+        <p class="float-right">Welcome back, {{ signedinUser }}!</p> 
+    </div>
+    <button mat-raised-button color="primary" *ngIf="!isSignedin" routerLink="/admin-signin" class="security-btn">Signin</button>
+    <button mat-raised-button color="primary" *ngIf="isSignedin" (click)="doSignout()" class="security-btn">Signout</button>
+   
+</div>
+

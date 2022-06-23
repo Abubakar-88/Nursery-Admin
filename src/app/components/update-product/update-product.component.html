@@ -1,0 +1,63 @@
+
+<div class="jumbotron d-flex align-items-center min-vh-100">
+  
+<div class="col-md-6 col-lg-6">
+   
+   <!-- <div class="flex-item-center">
+      <h3>Products</h3>
+      <div class="very-small-gap"></div>
+      <mat-icon matTooltip="Create products">help_outline</mat-icon>
+    </div> -->
+    <a mat-raised-button color="primary" [routerLink]="['/add-product']">
+      <mat-icon>add</mat-icon>
+      Add Product
+    </a>
+
+    <a class="pup-btn"mat-raised-button [routerLink]="['/product-list']">Go To Product List</a>
+
+
+    <h3> Update Product </h3>
+    <form (ngSubmit) = "onSubmit()">
+    
+        <div class="form-group">
+            <label> Product Name</label>
+            <input type="text" class ="form-control" id = "name"
+                [(ngModel)] = "product.name"  name = "name">
+        </div>
+
+        <div class="form-group">
+            <label> Product Sku</label>
+            <input type="text" class ="form-control" id = "sku"
+                [(ngModel)] = "product.sku" name= "sku">
+        </div>
+        <div class="form-group">
+         <label> Product Description</label>
+         <textarea type="textarea" class ="form-control" id = "description"
+             [(ngModel)] = "product.description" name= "description"></textarea>
+     </div>
+        <div class="form-group">
+            <label> Unit Price</label>
+            <input type="text" class ="form-control" id = "unitPrice"
+                [(ngModel)] = "product.unitPrice" name = "unitPrice">
+        </div>
+    
+        <div class="form-group">
+            <label> Unit in Stock</label>
+            <input type="text" class ="form-control" id = "unitsInStock"
+                [(ngModel)] = "product.unitsInStock" name = "unitsInStock">
+        </div>
+        <div class="form-group">
+         <label> Product Image</label>
+         <input type="text" class ="form-control" id = "imageUrl"
+             [(ngModel)] = "product.imageUrl" name= "imageUrl">
+     </div>
+        <button class = "btn btn-success" type ="submit">Submit</button>
+    
+    </form>
+    </div> 
+
+
+
+
+
+</div> 
