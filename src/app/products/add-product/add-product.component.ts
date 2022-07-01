@@ -13,9 +13,9 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class AddProductComponent implements OnInit {
 
-//authorization
-isSignedin:  boolean = false;
-signedinUser: string = '';
+  //authorization
+  isSignedin: boolean = false;
+  signedinUser: string = '';
 
 
   productForm!: FormGroup;
@@ -23,10 +23,10 @@ signedinUser: string = '';
   //   {
   //     Id: -1,
   //     categoryName: 'Root',
-      
+
   //   }
   // ];
-  
+
   productCategories!: ProductCategory[];
   constructor(
     private categoryService: CategoryService,
@@ -36,7 +36,7 @@ signedinUser: string = '';
     private authService: AuthService,
   ) { }
 
-  
+
 
   ngOnInit(): void {
     this.categoryService.getCategories().subscribe(res => {
@@ -50,36 +50,37 @@ signedinUser: string = '';
       dateCreated: [new Date().toUTCString()],
       active: [true],
       imageUrl: [],
-      unitsInStock:[],
-      category_id:[]
+      unitsInStock: [],
+      category_id: []
     });
 
     this.isSignedin = this.authService.isUserSignedin();
-		this.signedinUser = this.authService.getSignedinUser();
+    this.signedinUser = this.authService.getSignedinUser();
 
-		if(!this.authService.isUserSignedin()) {
-			this.router.navigateByUrl('admin-signin');
-		}
+    if (!this.authService.isUserSignedin()) {
+      this.router.navigateByUrl('admin-signin');
+    }
 
   }
 
 
 
-changeCategory(value: any) {
-  console.log(value);
-}
+  changeCategory(value: any) {
+    console.log(value);
+    this.productForm.controls['category_id'].setValue(value);
+  }
 
 
 
   getCategory(category: ProductCategory) {
     this.updateCategoryPath(category);
-     this.categoryService.getCategories().subscribe(res => {
-       console.log('Product Categories=' + JSON.stringify(res));
-       this.productCategories = res;
-     });
-   }
+    this.categoryService.getCategories().subscribe(res => {
+      console.log('Product Categories=' + JSON.stringify(res));
+      this.productCategories = res;
+    });
+  }
 
-   updateCategoryPath(category: ProductCategory) {
+  updateCategoryPath(category: ProductCategory) {
     const tempIndex = this.productCategories.indexOf(category);
     if (tempIndex == -1) {
       this.productCategories.push(category);
@@ -90,9 +91,10 @@ changeCategory(value: any) {
 
 
   onProductFormSubmit() {
-   //this.productForm.controls['categoryId'].patchValue(this.productCategories[this.productCategories.length -1].Id);
-    this.productService.addProduct(this.productForm.value).subscribe(res => {
-      //this.openSnackBar('Successfully created');
+    const value = JSON.parse(JSON.stringify(this.productForm.value))
+    value['category'] = { id: value.category_id }
+    delete value.category_id
+    this.productService.addProduct(value).subscribe(res => {
       this.router.navigate(['/product-list']);
     });
   }

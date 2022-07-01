@@ -27,15 +27,15 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col"> order_tracking_number</th>
-                <th scope="col">total_price</th>
-                <th scope="col">total_quantity</th>
-                <th scope="col">billing_address_id</th>
-                <th scope="col">customer_id</th>
-                <th scope="col">shipping_address_id</th>
-                <th scope="col">status</th>
-                <th scope="col">date_created</th>
-                <th scope="col">last_updated</th>
+                <th scope="col"> Order Tracking Number</th>
+                <th scope="col">Total Price</th>
+                <th scope="col">Total Quantity</th>
+                <th scope="col">Billing Address ID</th>
+                <th scope="col">Customer ID</th>
+                <th scope="col">Shipping Address ID</th>
+                <th scope="col">Status</th>
+                <th scope="col">Create Date</th>
+                <th scope="col">Last Updated</th>
               </tr>
             </thead>
             <tbody>
@@ -54,10 +54,10 @@
                   
                   {{ order?.totalPrice | currency: 'USD'}}
                 </td>
-                <td>{{ order?.totalQuantity}}</td>
-                <td> {{order?.billingAddress}}  </td>
-                <td>{{getCustomerName(order)}}</td>
-                <td>{{ order?.shippingAddress }}</td>
+                <td style="text-align: center;">{{ order?.totalQuantity}}</td>
+                <td style="text-align: center;"> {{order?.billingAddress?.id}}  </td>
+                <td style="text-align: center;">{{order?.customer?.id}}</td>
+                <td style="text-align: center;">{{ order?.shippingAddress?.id }}</td>
                 <td>{{ order?.status }}</td>
                 <td>{{ order?.dateCreated }}</td>
                 <td>{{ order?.lastUpdated }}</td>

@@ -14,7 +14,7 @@ export class CategoryService {
 
   private categoryUrl = environment.apiBaseUrl;
 
-  private cUrl = 'http://localhost:8087/api/product-category2';
+  //private cUrl = 'http://localhost:8087/api/product-category2';
 
 
 
@@ -47,9 +47,9 @@ export class CategoryService {
     return this.httpClient.get<ProductCategory[]>(`${this.categoryUrl}`);
   }
 
-  getCategories2(): Observable<ProductCategory[]> {
-    return this.httpClient.get<ProductCategory[]>(`${this.cUrl}`);
-  }
+  // getCategories2(): Observable<ProductCategory[]> {
+  //   return this.httpClient.get<ProductCategory[]>(`${this.cUrl}`);
+  // }
 
 
 //  getCategories(): Observable<ProductCategory[]>{

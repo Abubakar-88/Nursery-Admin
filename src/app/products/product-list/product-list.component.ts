@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { Product } from 'src/app/common/product';
 import { ProductCategory } from 'src/app/common/product-category';
 import { AuthService } from 'src/app/services/auth.service';
-import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -14,7 +13,8 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements OnInit {
-  
+
+  error: string = '';
   currentProduct: Product = new Product;
   currentIndex = -1;
   title = '';
@@ -33,16 +33,16 @@ signedinUser: string = '';
   //public products!: Product[];
   
 
-  categories: ProductCategory[] = new Array();
-
   
-  error!: string;
+  productCategories: ProductCategory[] = new Array();
+  
+
   
   
   constructor(private productService: ProductService,
-    private categoryService: CategoryService,
     private authService:AuthService, 
-    private router: Router
+    private router: Router,
+    
   
     ) { 
     //   this.productCategories.push(this.rootCategory);
@@ -54,7 +54,6 @@ signedinUser: string = '';
     }
 
   ngOnInit(): void {
-    this.getCategory();
    this.getProduct();
     //this.refreshProducts();
    // this.retrieveProducts();
@@ -136,27 +135,27 @@ searchProduct(key: string):void{
     }
   }
 
-  public getCategory(){
-    this.categoryService.getCategories2().subscribe(
-      (response: ProductCategory[] )=> {
-        this.categories =response;
-        console.log(this.categories);
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
- }
+//   public getCategory(){
+//     this.categoryService.getCategories2().subscribe(
+//       (response: ProductCategory[] )=> {
+//         this.categories =response;
+//         console.log(this.categories);
+//       },
+//       (error: HttpErrorResponse) => {
+//         alert(error.message);
+//       }
+//     );
+//  }
 
  getCategoryName(product: Product): any{
-  for (let index = 0; index < this.categories.length; index++) {
-    if (this.categories[index].id === product.category_id) {
-      return this.categories[index].categoryName;
-      
-    }      
+  for (let index = 0; index < this.productCategories.length; index++) {
+    if (this.productCategories[index].id === product.category_id) {
+      return this.productCategories[index].categoryName;
+           
+    } 
 
-    console.log("category name:"+ this.categories[index].categoryName);
-  }
+    console.log("category name:"+ this.productCategories[index].categoryName);
+  } (error: any) => console.log(error);   
 }
 
 
